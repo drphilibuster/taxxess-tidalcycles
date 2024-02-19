@@ -1,0 +1,181 @@
+-- intro 
+d1
+$ fast 2
+$ arp "<down>"
+$ off "0.20" (|- n 0)
+$ off "0.40" (|- n 0)
+$ off "0.60" (|- n 0)
+$ off "0.80" (|- n 0)
+$ n "<c'maj5 a3'maj7 a4'maj7 b'maj5 b'maj5 a'maj7 c'maj7>"
+# "supersquare"
+# gain 0.3
+# room 4
+# orbit 0
+
+xfade 1 silence
+
+d2
+$ stack [
+    (
+        n "3 3 3 3" 
+        # s "bd"
+        # orbit 1
+    ),
+    (
+        n " 2 2 " 
+        # "sn"
+        # gain 0.5
+        # orbit 2
+    ),
+    (
+        iter 3
+        $ every 5 ("<0.5 1 0.5>" <~)
+        $ n "0 0 0 0 0 0 10 0 0 0 0 0"
+        # "hh"
+        # gain 1.2
+        # orbit 3
+    )
+]
+
+d2
+$ every 3 (chew 4 "0*2~2/3 1*4/6 2*2/4 [~ 3]")
+$ stack [
+    (
+        n "3 3 3 3" 
+        # s "bd"
+        # orbit 1
+    ),
+    (
+        n " 2 2 " 
+        # "sn"
+        # gain 0.5
+        # orbit 2
+    ),
+    (
+        iter 3
+        $ every 5 ("<0.5 1 0.5>" <~)
+        $ n "0 0 0 0 0 0 10 0 0 0 0 0"
+        # "hh"
+        # gain 1.2
+        # orbit 3
+    )
+]
+
+-- melody
+
+d1
+$ whenmod 5 3 (randslice 16)
+$ stack [
+    (
+        arp "<pinkyup>"
+        $ n "<f'maj a'maj c'maj f'maj a'maj c'maj f'maj a'maj c'maj e'maj>"
+        # s "supergong"
+        # sustain 2
+        # lfo 1
+        # rate 1
+        # resonance "<0.5 0.6 0.7>"
+        # gain 0.5
+        # orbit 0
+        # delay 1
+        # delaytime 1
+        # delayfeedback 0.6
+        # cutoff 1000
+    ),
+    (
+        slow 2
+        $ arp "<pinkyup>"
+        $ n "<a'min c'maj e'min a'maj c'maj a'maj a'min c'maj e'min g'maj>"
+        # s "supersaw"
+        # sustain 2
+        # lfo 1
+        # rate 1
+        # resonance "<0.5 0.6 0.7>"
+        # orbit 0
+        # crush 8
+        # delay 1
+        # delaytime 1
+        # delayfeedback 0.8
+        # gain 0.6
+        # cutoff "500 1000 500"
+        # resonance "0.4 0.6 0.4"
+    )
+]
+# room 1.5
+# gain 0.55
+# enhance 0.05
+# cutoff 500
+# orbit 0
+
+
+flood "back on my bullshit. "
+
+d1 silence
+
+-- kick flutter
+d2 
+$ jux' [id,rev,(# speed 2)] $ every 2 ("<0.25 0.125 0.5>" <~)
+$ whenmod 2 1 (striate 7)
+$ n "0~0~0~"
+# "bd"
+# gain 1
+# orbit 1
+
+-- kick flutter chop
+d2 
+$ striate 2
+$ chop 4
+$ jux' [id,rev,(# speed 2)] $ every 2 ("<0.25 0.125 0.5>" <~)
+$ whenmod 2 1 (striate 7)
+$ n "0~0~0~"
+# "bd"
+# gain 1
+# orbit 1
+
+hush
+
+-- snare lock
+d3
+$ n "~0~0"
+# "sd"
+# gain 0.9
+# orbit 2
+
+-- hh riff
+d4
+$ echoWith 4 (1/6) (|* speed "1.5") 
+$ every 4 (striate 8)
+$ n "0~0~0~0~0~0~0~0~"
+# "hh"
+# gain 1
+# orbit 3
+
+
+d5
+$ slow 5
+$ n "a'min a'min _ _ _ _ ~ ~ c'maj e'min a'maj c'maj a'maj a'min c'maj c'maj c'maj c'maj e'min g'maj"
+# "supersquare"
+# gain 0.7 
+# orbit 4
+# pitch1 0.3
+
+
+xfade 5 silence
+
+hush
+
+-- outro
+d1
+$ whenmod 5 3 (striate 32)
+$ fast 2
+$ arp "<pinkyup>"
+$ n "<f'maj a'maj c'maj f'maj a'maj5 c'maj f'maj a'maj c'maj e'maj>"
+# s "supermandolin"
+# sustain 2
+# lfo 1
+# rate 1
+# resonance "<0.5 0.6 0.7>"
+# gain 0.6
+# orbit 0
+# distort 0.5
+
+clutch 1 silence
