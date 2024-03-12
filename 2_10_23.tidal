@@ -1,39 +1,76 @@
+let intro = "<c'maj5 a3'maj7 a4'maj7 b'maj5 b'maj5 a'maj7 c'maj7>"
+    melody1 = "<f'maj a'maj c'maj f'maj a'maj c'maj f'maj a'maj c'maj e'maj>"
+    melody2 = "<a'min c'maj e'min a'maj c'maj a'maj a'min c'maj e'min g'maj>"
+    melody3 = "<c'maj _ c'maj _ _ e'min _ g'maj a'min _ a'min _ _ ~ ~ ~ e'min _ d'maj5 _>"
+    outro = "<f'maj a'maj c'maj f'maj a'maj5 c'maj f'maj a'maj c'maj e'maj>"
+    fouronthefloor = "x~x~x~x~"
+    snarelock = "~x~x"
+    sixteenths = "x~x~x~x~x~x~x~x~"
+    hhriff = "0 0 0 0 0 0 10 0 0 0 0 0"
+    fade2black = slice 24 (cat ["13 14 15 16 17 18 19 20"])
+    terrorist = slice 24 (cat ["13 14 15 16 17 18 19 20", "21 22 15 15 13 14 13 14", "13 14 15 16 17 18 19 20", "21 22 15 15 13 14 13 14"])
+    black = slice 24 (cat ["13 14 13 14 13 14 15 16", "13 14 15 13 14 15 13 [13*2]", "13 14 13 14 15 16 17 18", "13 14 15 13 14 15 13 14", "13 14 13 14 13 14 15 16", "13 14 15 13 14 15 13 [13*2]", "13 14 15 16 17 18 19 20", "21 22 15 15 13 14 13 14"])
+    dimensionUK = slice 24 (cat ["13 14 15 16 15 16", "[15 16]*4"])
+    ursound = slice 24 (cat ["[13 14]*4", "21 22 23 21 22 23 21 22", "15 16 17 15 16 17 15 16", "13 15 16 17 18 19 20 21"])
+    ognuttah = slice 24 (cat ["15 16 15 16 17 15 16", "17 15 16 17 15 15 16 17", "15 15 16 15 16 17 15 16", "17 15 16 17 15 16 17 15"])
+    breakagae = slice 24 (cat ["13 14 13 14 15 16", "16 13 15 16 17 18 19 20", "13 14 15 16 16 16 15 16", "16 13 15 16 17 18 19 20"])
+    babylon = slice 24 (cat ["13 14 15 15 15 13 14 15", "13 14 15 16 15 16 17 18", "13 14 15 15 15 13 14 15", "13 14 15 16 [15*16]@4"]) $ s "breaks152" # gain 1.1 |- gain "<0!3 [0 0 [0.2 0.19 0.18 0.17 0.16 0.15 0.14 0.13 0.12 0.11 0.1 0.09 0.08 0.07 0.06 0.05 0.04 0.03 0.02 0.01]@2]>"
+    remarcRIP = slice "<24 24 48 24>" (cat ["13 14 15 15 15 15 16 17", "13 14 15 15 15 16 17 18", "26 27 28 30 31 [28*6]@3 30 31 34 35 36 37 28 29", "13 14 13 14 15 [15*6]@3"]) $ s "breaks152" # speed (cat ["1@3 -1 1@4", "1@2 -1 1@5", "1!3 -1!2 1!3 -1!2 1!6", "1"])
+    acidrain = slice 24 (cat ["13 14 15 13 14 15 15 15", "13 14 18 18 19 20 21 22", "15 15 16 17 13 14 15 16", "13 14 18 18 19 20 21 22"])
+    breakgato = legato "<1 [1@7 0.7] 1 [1@7 0.65]>"
+    off20 = off "0.20" (|- n 0) 
+    off40 = off "0.40" (|- n 0) 
+    off60 = off "0.60" (|- n 0) 
+    off80 = off "0.80" (|- n 0)
+    track1 = orbit 0
+    track2 = orbit 1
+    track3 = orbit 2
+    track4 = orbit 3
+    track5 = orbit 4
+    track6 = orbit 5
+    track7 = orbit 6
+    track8 = orbit 7
+
 -- intro 
-d1
+d3
 $ fast 2
 $ arp "<down>"
-$ off "0.20" (|- n 0)
-$ off "0.40" (|- n 0)
-$ off "0.60" (|- n 0)
-$ off "0.80" (|- n 0)
-$ n "<c'maj5 a3'maj7 a4'maj7 b'maj5 b'maj5 a'maj7 c'maj7>"
+$ off20
+$ off40
+$ off60
+$ off80
+$ n intro
 # "supersquare"
 # gain 0.3
 # room 4
-# orbit 0
+# track3
 
-xfade 1 silence
+xfade 3 silence
+
+hush
 
 d2
 $ stack [
     (
-        n "3 3 3 3" 
-        # s "bd"
-        # orbit 1
+        n fouronthefloor
+        # s "bd:0"
+        # track2
     ),
     (
-        n " 2 2 " 
-        # "sn"
-        # gain 0.5
-        # orbit 2
+        n snarelock
+        # "sn:2"
+        # gain 0.85
+        # track3
+        # room 0.5
+        # size 0.5
     ),
     (
         iter 3
         $ every 5 ("<0.5 1 0.5>" <~)
-        $ n "0 0 0 0 0 0 10 0 0 0 0 0"
+        $ n hhriff
         # "hh"
         # gain 1.2
-        # orbit 3
+        # track4
     )
 ]
 
@@ -41,23 +78,25 @@ d2
 $ every 3 (chew 4 "0*2~2/3 1*4/6 2*2/4 [~ 3]")
 $ stack [
     (
-        n "3 3 3 3" 
-        # s "bd"
-        # orbit 1
+        n fouronthefloor
+        # s "bd:0"
+        # track2
     ),
     (
-        n " 2 2 " 
-        # "sn"
+        n snarelock
+        # "sn:2"
         # gain 0.5
-        # orbit 2
+        # track3
+        # room 0.5
+        # size 0.5
     ),
     (
         iter 3
         $ every 5 ("<0.5 1 0.5>" <~)
-        $ n "0 0 0 0 0 0 10 0 0 0 0 0"
+        $ n hhriff
         # "hh"
         # gain 1.2
-        # orbit 3
+        # track4
     )
 ]
 
@@ -68,14 +107,13 @@ $ whenmod 5 3 (randslice 16)
 $ stack [
     (
         arp "<pinkyup>"
-        $ n "<f'maj a'maj c'maj f'maj a'maj c'maj f'maj a'maj c'maj e'maj>"
+        $ n melody1
         # s "supergong"
         # sustain 2
         # lfo 1
         # rate 1
         # resonance "<0.5 0.6 0.7>"
         # gain 0.5
-        # orbit 0
         # delay 1
         # delaytime 1
         # delayfeedback 0.6
@@ -84,13 +122,12 @@ $ stack [
     (
         slow 2
         $ arp "<pinkyup>"
-        $ n "<a'min c'maj e'min a'maj c'maj a'maj a'min c'maj e'min g'maj>"
+        $ n melody2
         # s "supersaw"
         # sustain 2
         # lfo 1
         # rate 1
         # resonance "<0.5 0.6 0.7>"
-        # orbit 0
         # crush 8
         # delay 1
         # delaytime 1
@@ -101,10 +138,10 @@ $ stack [
     )
 ]
 # room 1.5
-# gain 0.55
+# gain 0.48
 # enhance 0.05
 # cutoff 500
-# orbit 0
+# track2
 
 
 flood "back on my bullshit. "
@@ -115,10 +152,10 @@ d1 silence
 d2 
 $ jux' [id,rev,(# speed 2)] $ every 2 ("<0.25 0.125 0.5>" <~)
 $ whenmod 2 1 (striate 7)
-$ n "0~0~0~"
-# "bd"
+$ n fouronthefloor
+# "bd:0"
 # gain 1
-# orbit 1
+# track2
 
 -- kick flutter chop
 d2 
@@ -126,37 +163,47 @@ $ striate 2
 $ chop 4
 $ jux' [id,rev,(# speed 2)] $ every 2 ("<0.25 0.125 0.5>" <~)
 $ whenmod 2 1 (striate 7)
-$ n "0~0~0~"
-# "bd"
+$ n fouronthefloor
+# "bd:0"
 # gain 1
-# orbit 1
+# track2
 
 hush
 
 -- snare lock
 d3
-$ n "~0~0"
-# "sd"
-# gain 0.9
-# orbit 2
+$ n snarelock
+# s "sd:2"
+# gain 1
+# track3
+
+d3 silence
 
 -- hh riff
 d4
+$ scramble 2
 $ echoWith 4 (1/6) (|* speed "1.5") 
 $ every 4 (striate 8)
-$ n "0~0~0~0~0~0~0~0~"
-# "hh"
-# gain 1
-# orbit 3
+$ n fouronthefloor
+# "hh:2"
+# gain 1.1
+# track4
+# phaserdepth 0.8
+# phaserrate 1
 
+d4  silence
 
 d5
 $ slow 5
-$ n "a'min a'min _ _ _ _ ~ ~ c'maj e'min a'maj c'maj a'maj a'min c'maj c'maj c'maj c'maj e'min g'maj"
+$ n melody3
 # "supersquare"
-# gain 0.7 
-# orbit 4
+# gain 0.5
+# track5
 # pitch1 0.3
+# room 0.8
+# size 0.9
+# delaytime 0.8
+# delayfeedback 0.8
 
 
 xfade 5 silence
@@ -168,14 +215,25 @@ d1
 $ whenmod 5 3 (striate 32)
 $ fast 2
 $ arp "<pinkyup>"
-$ n "<f'maj a'maj c'maj f'maj a'maj5 c'maj f'maj a'maj c'maj e'maj>"
+$ n outro
 # s "supermandolin"
 # sustain 2
 # lfo 1
 # rate 1
 # resonance "<0.5 0.6 0.7>"
-# gain 0.6
-# orbit 0
+# gain 0.8
+# track1
 # distort 0.5
 
 clutch 1 silence
+
+d4
+$ slow 2
+$ s "supersaw"
+# n (arpg melody2)
+# room 0.99
+# size 0.999
+# track3
+# gain 0.5
+
+hush
