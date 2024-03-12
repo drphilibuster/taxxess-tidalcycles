@@ -4,9 +4,9 @@ d8 $ sound "cp" # gain 0.8
 hush 
 
 d1 
-$ iter 2 
-$ s "hh"
-# orbit 0
+$ s "hh:2"
+# n "x~x~x~x~x~x~x~x~"
+# track1
 
 d1 
 $ stack [
@@ -15,20 +15,20 @@ $ s "hh",
 every 2 ("<1 0.75 0.5 0.25 0.10>" <~) 
 $ s (steps [("hh", "x x x x "),("hh:7", "     x  ")]) 
 ]
-# orbit 0
+# track1
 
 d2 
 $ slow 1
 $ iter 2 
 $ s (steps [("sn:2", " x x")])
-# orbit 1
+# track2
 
 d2 silence
 
 hush
 
 -- normal
-d1 
+d2
 $ every 2 ("<0.25 0.5 0.125 0.5>" <~) 
 $ stack [
 s (steps [("hh","x   x  x xx  x  "),("bd", "xxxx")])
@@ -37,11 +37,11 @@ s (steps [("hh","x   x  x xx  x  "),("bd", "xxxx")])
 # squiz "<1 2.5 2>"
 # room (slow 4 $ range 0 0.2 saw)
 # sz 0.5
-# orbit 0
+# track3
 # gain 1
 
 -- fucked
-d1 
+d2
 $ every 2 ("<0.25 0.5 0.125 0.5>" <~) 
 $ stack [
 s (steps [("hh","x   x  x xx  x  "),("bd", "xxxx")])
@@ -50,9 +50,9 @@ s (steps [("hh","x   x  x xx  x  "),("bd", "xxxx")])
 # squiz "<1 2.5 2>"
 # room (slow 4 $ range 0 0.2 saw)
 # sz 0.5
-# orbit 0
+# track3
 # gain 1
-# cps (slow 8 $ 0.5 + sine)
+# cps (slow 8 $ 0.5 + rand)
 
 hush
 
@@ -67,10 +67,12 @@ $ sound "cp:5"
 # delaytime "x" 
 # delay 0.8 
 # delayfb 0.4 
-# gain ("0.1 0.2 0.3 0.4 0.5 0.6")
-# orbit 5
+# gain ("0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8")
+# track3
 
-d1  
+d6
+$ fast 3
+$ every 4 (slow 2)
 $ stutter 4 (1/16)
 $ every 2 ("<0.25 0.5 0.125 0.5>" <~) 
 $ stack [
@@ -81,14 +83,15 @@ s (steps [("can:4", "x   ")])
 # squiz "<1 2.5 2>"
 # room (slow 4 $ range 0 0.2 saw)
 # sz 0.5
-# orbit 0
-# gain "0.1 0.3 0.5 0.7 0.9 1"
+# track3
+# gain "<0.1 0.3 0.5 0.7 0.8>"
 
-d2 
+d6
 $ ((slice (irand 8) (choose [round 0.125, round 0.25, round 0.5]))) 
-$ sound "cp" 
+$ sound "breaks123" 
 # delay 0.25
-# orbit 1
+# track4
+# gain 2
 
 d5 silence 
 
@@ -107,23 +110,23 @@ s (steps [("can:4", "x   ")])
 # sz 0.5
 # tsdelay "0 0.25 0.5 0.75 1 2" 
 # xsdelay "3 124 3 12 62 2 3"
-# orbit 1
+# track 2
 # gain 2
 
 d2 silence
 
-d2  
+d3 
 $ every 2 (0.25 <~) 
 $ stack [
 s "bd*2 [[~ sn:2] sn:3] bd:1 [~ bd:3*2]",
 s "hh*8 [[~ hh:hh*2] hh:8*4]"
 ]
-# orbit 1
+# track1
 
-d3 silence
+clutch 5 silence
 
 d5 $ s "cp*2"
-# orbit 4
+# track5
 
 d5 silence
 
@@ -132,12 +135,12 @@ d5 silence
 d1 
 $ s "bd sn"
 # striate 0.5
-# orbit 1
+# track2
 
 hush
 
 d6 $ clock # x 5
-# orbit 5
+# track6
 
 d9  
 $ n "[0 11]/8" 
@@ -149,9 +152,11 @@ $ n "[0 11]/8"
 # lfo 1
 # rate 0.5
 # gain 0.5
-# orbit 8
+# track4
 
-d9 silence
+hush
+
+clutch 9 silence
 
 -- get fucked
 d4  
@@ -165,32 +170,40 @@ $ n "<c'maj'5 a4'min'3 b4'maj'2>"
 # sustain 3
 # sz 1
 # gain 0.6
-# cps (slow 8 $ 0.5 + sine)
-# orbit 3
+# cps (slow 8 $ 0.5 + rand)
+# track3
 
-d4 silence
+clutch 4 silence
+
 hush
 
 p "cpsfun" 
 $ s "bd sd(3,8)" 
 # cps (slow 8 $ 0.5 + saw)
 
-d3
-$ n "4 4 4 4" 
-# s "bd" 
-# orbit 2
-
 d2
-$ n " 3 3 " 
-# s "sn" 
-# orbit 1
+$ n fouronthefloor 
+# s "bd:0" 
+# track4
 
-d2 silence
+d4
+$ every 4 (slow 2)
+$ n snarelock
+# s "sn:2" 
+# track5
+# room 0.5
+# size 0.5
 
-d3
-$ n "2"
-# s "hh"
-# orbit 2
+xfade 3 silence
+
+d5
+$ fast 6
+$ every 6 (striate 16)
+$ n sixteenths
+# s "hh:0"
+# track6
+
+xfade 5 silence
 
 -- fucked
 d5
@@ -202,6 +215,6 @@ $ n "c'maj f'maj7 g'maj5 c'maj5 a'min4 c'maj5"
 # octersubsub 1
 # gain 0.3
 # cps (slow 8 $ 0.5 + sine)
-# orbit 4
+# track5
 
 hush
