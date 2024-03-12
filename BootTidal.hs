@@ -98,24 +98,24 @@ let target =
 
 default (Pattern String, Integer, Double)
 
-## Midi setup
-# Start sending MIDI clock messages, 48 per cycle (adjust midi device name):
+-- Midi setup
+-- Start sending MIDI clock messages, 48 per cycle (adjust midi device name):
 
-p "midiclock" $ midicmd "midiClock*48" # s "dawtest"
+p "midiclock" $ midicmd "midiClock*48" -- s "dawtest"
 
-# Your MIDI device should adjust its BPM to Tidal's cps. Send a stop message:
+-- Your MIDI device should adjust its BPM to Tidal's cps. Send a stop message:
 
-once $ midicmd "stop" # s "dawtest"
+once $ midicmd "stop" -- s "dawtest"
 
-# Send a start message to start the MIDI clock at the right time. The following sends a start message every fourth cycle:
+-- Send a start message to start the MIDI clock at the right time. The following sends a start message every fourth cycle:
 
-p "midictl" $ midicmd "start/4" # s "dawtest"
+p "midictl" $ midicmd "start/4" -- s "dawtest"
 
-# Once everything's started and in sync, it's probably best to stop sending the start messages to avoid glitching:
+-- Once everything's started and in sync, it's probably best to stop sending the start messages to avoid glitching:
 
 p "midictl" $ silence
 
-# However now if you do hush, the midiclock will stop as well as all the other patterns. To avoid this, you can overwrite the hush function with a version that silences particular patterns:
+-- However now if you do hush, the midiclock will stop as well as all the other patterns. To avoid this, you can overwrite the hush function with a version that silences particular patterns:
 
 let hush = mapM_ ($ silence) [d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13,d14,d15,d16]
 
