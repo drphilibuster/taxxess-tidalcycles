@@ -1,0 +1,76 @@
+setcps 0.66
+
+d1
+$ loopAt 3
+$ s "breaks152"
+# track1
+
+d1
+$ fast 3
+$ loopAt 3
+$ every 12 (striate 16)
+$ every 20 (striate 32)
+$ fade2black
+$ s "breaks152"
+# cut 1
+# gain 1
+# track1
+
+
+d1 
+$ fast 3
+$ loopAt 3
+$ every 12 (striate 16)
+$ every 20 (striate 32)
+$ black
+$ s "breaks152"
+# breakgato
+# gain 1
+# track1
+
+d1 
+$ fast 3
+$ loopAt 3
+$ every 10 (chop 8)
+$ every 12 (striate 16)
+$ every 20 (striate 32)
+$ acidrain
+$ s "breaks152"
+# gain 1
+# track1
+
+d1
+$ fast 3
+$ loopAt 3
+$ remarcRIP 
+# track1
+
+d1
+$ fast 3
+$ loopAt 3
+$ every 10 (chop 8)
+$ every 20 (striate 16)
+$ every 25 (striate 40)
+$ remarcRIP 
+# track1
+
+hush
+
+d1
+$ fast 3
+$ loopAt 3
+$ slice 24 (
+    cat [
+        "13 14 13 14 13 14 15 16", 
+        "16 13 15 16 17 18 19 20", 
+        "13 14 15 16 16 16 15 16", 
+        "16 13 15 16 17 18 19 20"
+        ]
+    )
+$ s "breaks152"
+
+hush
+
+d1
+
+clutch 1 silence
