@@ -1,0 +1,27 @@
+setcps (120/60/4)
+
+d3
+$ slow 8 
+$ randslice "2" 
+$ sound "pad:4 pad:6 pad:2 pad:8"
+# speed "0.95"
+# squiz "1 4 2 6"
+# delay 10
+# delayfeedback 0.5
+# delaytime "0.75 0.45"
+# cut 8
+# gain 0.6
+# track3
+
+d4 
+$ slow 4 
+$ sound "sax:2 sax:3"
+# delay 5
+# delayfeedback 0.5
+# delaytime "0.75 0.45 0.25 0.99"
+# cut 8
+# track4
+
+hush
+
+clutch 3 silence
