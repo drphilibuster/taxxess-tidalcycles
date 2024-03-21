@@ -74,3 +74,9 @@ hush
 d1
 
 clutch 1 silence
+
+d3
+$ fast 12
+$ n melody2
+# s "bass"
+# track3
