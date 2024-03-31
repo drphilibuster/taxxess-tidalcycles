@@ -49,22 +49,22 @@ let only = (hush >>)
     anticipate i = transition tidal True (Sound.Tidal.Transition.anticipate) i
     anticipateIn i t = transition tidal True (Sound.Tidal.Transition.anticipateIn t) i
     forId i t = transition tidal False (Sound.Tidal.Transition.mortalOverlay t) i
-    d1 = p 1 . (|< orbit 0)
-    d2 = p 2 . (|< orbit 1)
-    d3 = p 3 . (|< orbit 2)
-    d4 = p 4 . (|< orbit 3)
-    d5 = p 5 . (|< orbit 4)
-    d6 = p 6 . (|< orbit 5)
-    d7 = p 7 . (|< orbit 6)
-    d8 = p 8 . (|< orbit 7)
-    d9 = p 9 . (|< orbit 8)
-    d10 = p 10 . (|< orbit 9)
-    d11 = p 11 . (|< orbit 10)
-    d12 = p 12 . (|< orbit 11)
-    d13 = p 13
-    d14 = p 14
-    d15 = p 15
-    d16 = p 16
+    d1 = p 17 . (|< orbit 0)
+    d2 = p 18 . (|< orbit 1)
+    d3 = p 19 . (|< orbit 2)
+    d4 = p 20 . (|< orbit 3)
+    d5 = p 21 . (|< orbit 4)
+    d6 = p 22 . (|< orbit 5)
+    d7 = p 23 . (|< orbit 6)
+    d8 = p 24 . (|< orbit 7)
+    d9 = p 25 . (|< orbit 8)
+    d10 = p 26 . (|< orbit 9)
+    d11 = p 27 . (|< orbit 10)
+    d12 = p 28 . (|< orbit 11)
+    d13 = p 29 . (|< orbit 12)
+    d14 = p 30 . (|< orbit 13)
+    d15 = p 31 . (|< orbit 14)
+    d16 = p 32 . (|< orbit 15)
     tsdelay = pF "tsdelay"
     xsdelay = pI "xsdelay"
     
@@ -101,15 +101,15 @@ default (Pattern String, Integer, Double)
 -- Midi setup
 -- Start sending MIDI clock messages, 48 per cycle (adjust midi device name):
 
-p "midiclock" $ midicmd "midiClock*48" -- s "monologue"
+p "midiclock" $ midicmd "midiClock*48" -- s "ES9"
 
 -- Your MIDI device should adjust its BPM to Tidal's cps. Send a stop message:
 
-once $ midicmd "stop" -- s "monologue"
+once $ midicmd "stop" -- s "ES9"
 
 -- Send a start message to start the MIDI clock at the right time. The following sends a start message every fourth cycle:
 
-p "midictl" $ midicmd "start/4" -- s "monologue"
+p "midictl" $ midicmd "start/4" -- s "ES9"
 
 -- Once everything's started and in sync, it's probably best to stop sending the start messages to avoid glitching:
 
