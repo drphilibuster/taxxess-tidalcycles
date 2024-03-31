@@ -33,6 +33,7 @@ let intro = "<c'maj5 a3'maj7 a4'maj7 b'maj5 b'maj5 a'maj7 c'maj7>"
     rip a b p = within (0.25, 0.75) (slow 2 . rev . stut 8 a b) p
     rip' a b c d e p = within (a, b) (slow 2 . rev . stut c d e) p
     
+setcps 0.66
 
 -- intro 
 d3
