@@ -8,16 +8,19 @@ $ s "breaks152"
 d1
 $ fast 3
 $ loopAt 3
-$ every 12 (striate 16)
+$ every 19 (striate 16)
 $ every 20 (striate 32)
 $ fade2black
 $ s "breaks152"
 # cut 1
 # gain 1
-# track1
+# track5
 
+hush
 
 d1 
+$ sometimes (off 0.125 (|+ up "[7|12]")) 
+$ someCyclesBy 0.2 (mask (binary 200)) 
 $ fast 3
 $ loopAt 3
 $ every 12 (striate 16)
@@ -28,24 +31,31 @@ $ s "breaks152"
 # gain 1
 # track1
 
-d1 
+d1
+$ sometimes (off 0.125 (|+ up "[7|12]")) 
+$ someCyclesBy 0.2 (mask (binary 200)) 
 $ fast 3
 $ loopAt 3
 $ every 10 (chop 8)
 $ every 12 (striate 16)
 $ every 20 (striate 32)
-$ acidrain
+$ terrorist
 $ s "breaks152"
 # gain 1
 # track1
 
 d1
+$ sometimes (off 0.125 (|+ up "[7|12]")) 
+$ someCyclesBy 0.2 (mask (binary 200)) 
 $ fast 3
 $ loopAt 3
-$ remarcRIP 
+$ terrorist 
+$ s "breaks152"
 # track1
 
 d1
+$ sometimes (off 0.125 (|+ up "[7|12]")) 
+$ someCyclesBy 0.2 (mask (binary 200)) 
 $ fast 3
 $ loopAt 3
 $ every 10 (chop 8)
@@ -71,12 +81,185 @@ $ s "breaks152"
 
 hush
 
-d1
+d3 silence
 
 clutch 1 silence
 
-d3
-$ fast 12
-$ n melody2
-# s "bass"
-# track3
+
+-- first pass, struct defines rhythm, foundational harmonic line defined by note
+
+d2 
+$ struct "t*16" 
+$ note "[7 0 0 0 5 0 3 5 0 7 0 0 0 1 0 3 5 ]" 
+# s "bass1:2" 
+# cut 1
+# coarse 5
+# track6
+
+-- add harmonic variation
+d2 
+$ sometimes (off 0.125 (|+ up "[7|12]")) 
+$ struct "t*16" 
+$ note "[7 0 0 0 5 0 3 5 0 7 0 0 0 1 0 3 5 ]" 
+# s "bass1:2" 
+# cut 1
+# track6
+
+-- add rhythmic variation
+d2 
+$ sometimes (off 0.125 (|+ up "[7|12]")) 
+$ someCyclesBy 0.2 (mask (binary 200)) 
+$ struct "t*16" 
+$ note "[7 0 0 0 5 0 3 5 0 7 0 0 0 1 0 3 5 ]" 
+# s "bass1:2" 
+# cut 1
+# track6
+
+-- add timbre variation
+d2 
+$ sometimes (off 0.125 (|+ up "[7|12]")) 
+$ someCyclesBy 0.2 (mask (binary 200)) 
+$ struct "t*16" 
+$ note "[7 0 0 0 5 0 3 5 0 7 0 0 0 1 0 3 5 7 0 0 0 5 0 3 5 0 7 0 0 0 1 0 3 5 ]" 
+# s "<bass1:2!4 bass1:2!6>" 
+# cut 1 
+# coarse 5
+# track6
+
+-- more rhythmic mods/final line
+d2 $ swingBy 0.2 16 
+$ whenmod 18 17 (#silence) 
+$ someCyclesBy 0.1 (linger "s") 
+$ sometimes (off 0.125 (|+ up "[7|12]"))
+$ someCyclesBy 0.2 (mask (binary 200)) 
+$ struct "t*16" 
+$ note (
+    "[7 0 0 0 5 0 3 5 0 7 0 0 0 1 0 3 5 ]" 
+    - "[0 5 7 5 0]/5"
+    )
+# s "<bass1:2!4 bass1:2!8>" 
+# cut 1 
+# coarse 5
+# track6
+
+d2 
+$ sometimes (off 0.45 (|+ up "[7|12]"))
+$ someCyclesBy 0.2 (mask (binary 200)) 
+$ note (
+    "[7 0 0 0 5 0 3 5 0 7 0 0 0 1 0 3 5 ]"  -- some melodic line 
+    + "[-12 0 5 7]"  -- add some harmonics to each note
+    - 12             -- shift one octave down (everything)
+    - "[0 5 7 0]/5"  -- some global structure (shift base note every two cycles)
+)
+# s "<bass1:2!4>" 
+# gain "[1@3 0]*12" -- chop and separate notes a bit
+# breakgato
+# track6
+
+ xfade 2 silence
+
+d2
+$ swingBy ("q") 8
+$ fast 0.5
+$ n "<[[~ 0 0] ~ [~ 0] ~]>"
+# sound "sin"
+# gain "1.1"
+# pan "0.5"
+# shape "0.45"
+# resonance "0.46"
+# coarse 1
+# lpf "60"
+# attack 0.05
+# release 1.2
+# track6
+
+-- do it with midi
+-- first pass, struct defines rhythm, foundational harmonic line defined by note
+
+d2 
+$ struct "t*16" 
+$ note "[7 0 0 0 5 0 3 5 0 7 0 0 0 1 0 3 5 ]" 
+# s "monologue" 
+# cut 1
+# coarse 5
+# midichan 1
+
+hush
+d2 $ n "0 2 4 7" # s "monologue" # midichan 1
+
+-- add harmonic variation
+d2 
+$ sometimes (off 0.125 (|+ up "[7|12]")) 
+$ struct "t*16" 
+$ note "[7 0 0 0 5 0 3 5 0 7 0 0 0 1 0 3 5 ]" 
+# s "monologue" 
+# legato 1
+# midichan 1
+
+-- add rhythmic variation
+d2 
+$ sometimes (off 0.125 (|+ up "[7|12]")) 
+$ someCyclesBy 0.45 (mask (binary 200)) 
+$ struct "t*16" 
+$ note "[7 0 0 0 5 0 3 5 0 7 0 0 0 1 0 3 5 ]" 
+# s "monologue" 
+# legato 1
+# midichan 1
+
+-- add timbre variation
+d2 
+$ sometimes (off 0.125 (|+ up "[7|12]")) 
+$ someCyclesBy 0.45 (mask (binary 200)) 
+$ struct "t*16" 
+$ note "[7 0 0 0 5 0 3 5 0 7 0 0 0 1 0 3 5 7 0 0 0 5 0 3 5 0 7 0 0 0 1 0 3 5 ]" 
+# s "<monologue>" 
+# legato 1 
+# Drive 50
+# room 0.6
+# size 0.8
+# midichan 1
+
+-- more rhythmic mods/final line
+d2 $ swingBy 0.2 16 
+$ whenmod 18 17 (#silence) 
+$ someCyclesBy 0.1 (linger "s") 
+$ sometimes (off 0.125 (|+ down "[7|12]"))
+$ someCyclesBy 0.45 (mask (binary 200)) 
+$ struct "t*16" 
+$ note "[7 0 0 0 5 0 3 5 0 7 0 0 0 1 0 3 5 ]" 
+# s "monologue" 
+# legato 1 
+# Drive 127
+# midichan 1
+
+d2 
+$ fast 4
+$ sometimes (off 0.125 (|+ up "[7|12]"))
+$ someCyclesBy 0.2 (mask (binary 200)) 
+$ note (
+    "[7 0 0 0 5 0 3 5 0 7 0 0 0 1 0 3 5 ]"  -- some melodic line 
+    + "[-12,0,3,7]"  -- add some harmonics to each note
+    - 12             -- shift one octave down (everything)
+    + "[0 5 7 0]/8"  -- some global structure (shift base note every two cycles)
+)
+# s "<monologue>" 
+# Drive "[1@3 0]*12" -- chop and separate notes a bit
+# Cutoff sine
+# Vco2Pitch 8
+# Vco2Shape 6
+# midichan 1
+
+ hush
+
+d2
+$ swingBy ("q") 8
+$ fast 0.5
+$ n "<[[~ 0 0] ~ [~ 0] ~]>"
+# sound "monologue"
+# drive 121
+# Vco1Shape 55
+# Resonance 183
+# Cutoff 60
+# EgAttack 5
+# EgDecay 12
+# midichan 1

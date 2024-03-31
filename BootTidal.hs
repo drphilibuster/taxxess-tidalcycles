@@ -101,15 +101,15 @@ default (Pattern String, Integer, Double)
 -- Midi setup
 -- Start sending MIDI clock messages, 48 per cycle (adjust midi device name):
 
-p "midiclock" $ midicmd "midiClock*48" -- s "dawtest"
+p "midiclock" $ midicmd "midiClock*48" -- s "monologue"
 
 -- Your MIDI device should adjust its BPM to Tidal's cps. Send a stop message:
 
-once $ midicmd "stop" -- s "dawtest"
+once $ midicmd "stop" -- s "monologue"
 
 -- Send a start message to start the MIDI clock at the right time. The following sends a start message every fourth cycle:
 
-p "midictl" $ midicmd "start/4" -- s "dawtest"
+p "midictl" $ midicmd "start/4" -- s "monologue"
 
 -- Once everything's started and in sync, it's probably best to stop sending the start messages to avoid glitching:
 

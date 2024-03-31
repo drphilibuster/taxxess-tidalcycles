@@ -1,0 +1,26 @@
+let monologue :: Pattern String -> ControlPattern
+    monologue = n . (subtract 60 . monologueN <$>)
+    monologueN :: Num a => String -> a
+    monologueN "EgAttack" = 16
+    monologueN "EgDecay" = 17
+    monologueN "EgInt" = 25
+    monologueN "LfoRate" = 24
+    monologueN "LfoDepth" = 26
+    monologueN "Drive" = 28
+    monologueN "Vco2Pitch" = 35
+    monologueN "Vco1Shape" = 36
+    monologueN "Vco2Shape" = 37
+    monologueN "Vco1Level" = 39
+    monologueN "Vco2Level" = 40
+    monologueN "Cutoff" = 43
+    monologueN "Resonance" = 44
+    monologueN "Vco2Octave" = 49
+    monologueN "Vco1Wave" = 50
+    monologueN "Vco2Wave" = 51
+    monologueN "LfoTarget" = 56
+    monologueN "LfoWave" = 58
+    monologueN "LfoMode" = 59
+    monologueN "SyncRing" = 60
+    monologueN "EgType" = 61
+    monologueN "EgTarget" = 62
+    monologueN _ = 0
