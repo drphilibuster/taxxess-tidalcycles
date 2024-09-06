@@ -1,0 +1,95 @@
+-- parameters for TR-8 by Roland
+
+module Roland.Tr8 where
+
+  import qualified Sound.Tidal.Params
+  import Sound.Tidal.Pattern
+
+  -- MIDI notes
+
+  midiNote :: Pattern String -> ControlPattern
+  midiNote = Sound.Tidal.Params.n . (subtract 60 . Tr8MidiNote <$>)
+
+  Tr8MidiNote :: Num a => String -> a
+  Tr8MidiNote m =
+    case m of
+      "bd"  -> 35 -- kick
+      "bd2" -> 36 -- kick2
+      "sd"  -> 38 -- snare
+      "sd2" -> 40 -- snare2
+      "lt"  -> 41 -- loTom
+      "lt2" -> 43 -- loTom2
+      "mt"  -> 45 -- midTom
+      "mt2" -> 42 -- midTom2
+      "ht"  -> 48 -- hiTom
+      "ht2" -> 50 -- hiTom2
+      "rm"  -> 37 -- rimshot
+      "cp"  -> 39 -- clap
+      "ch"  -> 42 -- clHat
+      "ch2" -> 44 -- clHat2
+      "oh"  -> 46 -- opHat
+      "cr"  -> 49 -- crash
+      "rd"  -> 51 -- ride
+      "cb"  -> 56 -- cowbell
+      "tm"  -> 54 -- tambourine
+      _     -> 0
+
+  -- ControlChange list
+
+  ccn :: Pattern String -> ControlPattern
+  ccn = Sound.Tidal.Params.ccn . (ccnList <$>)
+  
+  ccnList :: Num a => String -> a
+  ccnList m =
+    case m of
+      "shuffle"             -> 9
+      "externalInLevel"     -> 12
+      "externalInSideChain  -> 13
+      "delayLevel"          -> 16
+      "delayTime"           -> 17
+      "delayFeedback"       -> 18
+      "kickTune"            -> 20
+      "kickAttack"          -> 21
+      "kickComp"            -> 22
+      "kickDecay"           -> 23
+      "kickLevel"           -> 24
+      "snareTune"           -> 25
+      "snareAttack"         -> 26
+      "snareComp"           -> 27
+      "snareDecay"          -> 28
+      "snareLevel"          -> 29
+      "loTomTune"           -> 40
+      "loTomDecay"          -> 41
+      "loTomLevel"          -> 48
+      "midTomTune"          -> 49
+      "midTomDecay"         -> 50
+      "midTomLevel"         -> 51
+      "hiTomTune"           -> 52
+      "hiTomDecay"          -> 53
+      "hiTomLevel"          -> 54
+      "rimshotTune"         -> 55
+      "rimshotDecay"        -> 56
+      "rimshotLevel"        -> 57
+      "clapTune"            -> 58
+      "clapDecay"           -> 59
+      "clapLevel"           -> 60
+      "clHatTune"           -> 61
+      "clHatDecay"          -> 62
+      "clHatLevel"          -> 63
+      "scatterType"         -> 68
+      "scatterDepth"        -> 69
+      "scatterSw"           -> 70
+      "accent"              -> 71
+      "opHatTune"           -> 80
+      "opHatDecay"          -> 81
+      "opHatLevel"          -> 82
+      "crashTune"           -> 83
+      "crashDecay"          -> 84
+      "crashLevel"          -> 85
+      "rideTune"            -> 86
+      "rideDecay"           -> 87
+      "rideLevel"           -> 88
+      "reverbTime"          -> 89
+      "reverbGate"          -> 90
+      "reverbLevel"         -> 91
+      _                     -> 0
