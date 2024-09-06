@@ -6,7 +6,8 @@ $ every 20 (striate 32)
 $ fast 24
 $ n melody2
 # s "bass"
-# track3
+
+hush
 
 d1
 $ sometimes (off 0.125 (|+ up "[7|12]")) 
@@ -17,7 +18,7 @@ $ fade2black
 $ s "breaks152"
 # cut 1
 # gain 1.5
-# track5
+
 
 hush
 
@@ -33,4 +34,3 @@ $ note (
 # breakgato
 # cut 1 
 # coarse 5
-# track6

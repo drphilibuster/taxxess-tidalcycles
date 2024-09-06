@@ -1,4 +1,4 @@
-setcps (120/60/4)
+setcps (156/60/4)
 
 d3
 $ slow 8 
@@ -11,7 +11,7 @@ $ sound "pad:4 pad:6 pad:2 pad:8"
 # delaytime "0.75 0.45"
 # cut 8
 # gain 0.6
-# track3
+
 
 d4 
 $ slow 4 
@@ -20,7 +20,7 @@ $ sound "sax:2 sax:3"
 # delayfeedback 0.5
 # delaytime "0.75 0.45 0.25 0.99"
 # cut 8
-# track4
+
 
 hush
 

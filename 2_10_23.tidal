@@ -2,6 +2,7 @@ let intro = "<c'maj5 a3'maj7 a4'maj7 b'maj5 b'maj5 a'maj7 c'maj7>"
     melody1 = "<f'maj a'maj c'maj f'maj a'maj c'maj f'maj a'maj c'maj e'maj>"
     melody2 = "<a'min c'maj e'min a'maj c'maj a'maj a'min c'maj e'min g'maj>"
     melody3 = "<c'maj _ c'maj _ _ e'min _ g'maj a'min _ a'min _ _ ~ ~ ~ e'min _ d'maj5 _>"
+    knowmelody = "<f'min a'min _ g'min g'min a'min _ d'min>"
     outro = "<f'maj a'maj c'maj f'maj a'maj5 c'maj f'maj a'maj c'maj e'maj>"
     fouronthefloor = "x~x~x~x~"
     snarelock = "~x~x"
@@ -22,49 +23,41 @@ let intro = "<c'maj5 a3'maj7 a4'maj7 b'maj5 b'maj5 a'maj7 c'maj7>"
     off40 = off "0.40" (|- n 0) 
     off60 = off "0.60" (|- n 0) 
     off80 = off "0.80" (|- n 0)
-    track1 = orbit 0
-    track2 = orbit 1
-    track3 = orbit 2
-    track4 = orbit 3
-    track5 = orbit 4
-    track6 = orbit 5
-    track7 = orbit 6
-    track8 = orbit 7
     rip a b p = within (0.25, 0.75) (slow 2 . rev . stut 8 a b) p
     rip' a b c d e p = within (a, b) (slow 2 . rev . stut c d e) p
     
 setcps 0.66
 
 -- intro 
-d3
+xfade 1
 $ fast 2
 $ arp "<down>"
 $ off20
 $ off40
-$ off60
+$ off60 
 $ off80
 $ n intro
 # "supersquare"
 # gain 0.3
 # room 4
-# track3
 
-xfade 3 silence
+
+xfade 4 silence
 
 hush
+
+panic
 
 d2
 $ stack [
     (
         n fouronthefloor
         # s "bd:0"
-        # track2
     ),
     (
         n snarelock
         # "sn:2"
         # gain 0.85
-        # track3
         # room 0.5
         # size 0.5
     ),
@@ -74,23 +67,20 @@ $ stack [
         $ n hhriff
         # "hh"
         # gain 1.2
-        # track4
     )
 ]
 
-d2
+clutch 2
 $ every 3 (chew 4 "0*2~2/3 1*4/6 2*2/4 [~ 3]")
 $ stack [
     (
         n fouronthefloor
         # s "bd:0"
-        # track2
     ),
     (
         n snarelock
         # "sn:2"
         # gain 0.5
-        # track3
         # room 0.5
         # size 0.5
     ),
@@ -100,13 +90,13 @@ $ stack [
         $ n hhriff
         # "hh"
         # gain 1.2
-        # track4
     )
 ]
+# orbit 1
 
 -- melody
 
-d1
+xfade 1
 $ whenmod 5 3 (randslice 16)
 $ stack [
     (
@@ -142,27 +132,27 @@ $ stack [
     )
 ]
 # room 1.5
-# gain 0.48
+# gain 0.45
 # enhance 0.05
 # cutoff 500
-# track2
 
+hush
 
 flood "back on my bullshit. "
 
-d1 silence
+xfade 2 silence
 
 -- kick flutter
-d2 
+clutch 2 
 $ jux' [id,rev,(# speed 2)] $ every 2 ("<0.25 0.125 0.5>" <~)
 $ whenmod 2 1 (striate 7)
 $ n fouronthefloor
 # "bd:0"
 # gain 1
-# track2
+# orbit 1
 
 -- kick flutter chop
-d2 
+clutch 2 
 $ striate 2
 $ chop 4
 $ jux' [id,rev,(# speed 2)] $ every 2 ("<0.25 0.125 0.5>" <~)
@@ -170,7 +160,7 @@ $ whenmod 2 1 (striate 7)
 $ n fouronthefloor
 # "bd:0"
 # gain 1
-# track2
+# orbit 1
 
 hush
 
@@ -179,43 +169,43 @@ d3
 $ n snarelock
 # s "sd:2"
 # gain 1
-# track3
+
 
 d3 silence
 
 -- hh riff
-d4
+clutch 4
+$ fast 2
 $ scramble 2
 $ echoWith 4 (1/6) (|* speed "1.5") 
 $ every 4 (striate 8)
 $ n fouronthefloor
-# "hh:2"
-# gain 1.1
-# track4
+# "hh:4"
+# gain 0.8
 # phaserdepth 0.8
 # phaserrate 1
+# orbit 3
 
-d4  silence
+xfade 4 silence
 
-d5
-$ slow 5
-$ n melody3
+clutch 1
+$ slow 2
+$ echoWith 4 (1/6) (|* speed "1.5") 
+$ n knowmelody
 # "supersquare"
 # gain 0.5
-# track5
 # pitch1 0.3
 # room 0.8
 # size 0.9
 # delaytime 0.8
 # delayfeedback 0.8
 
-
-xfade 5 silence
+xfade 2 silence
 
 hush
 
 -- outro
-d1
+xfade 1
 $ whenmod 5 3 (striate 32)
 $ fast 2
 $ arp "<pinkyup>"
@@ -226,18 +216,20 @@ $ n outro
 # rate 1
 # resonance "<0.5 0.6 0.7>"
 # gain 0.8
-# track1
 # distort 0.5
 
-clutch 1 silence
+xfade 4 silence
 
-d4
+xfade 1
 $ slow 2
 $ s "supersaw"
-# n (arpg melody2)
-# room 0.99
-# size 0.999
-# track3
-# gain 0.5
+# n (arpg knowmelody)
+# room 0.8
+# size 0.99
+# gain 0.45
+
+xfade 1 silence
+
+panic
 
 hush

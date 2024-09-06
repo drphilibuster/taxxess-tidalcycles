@@ -23,7 +23,9 @@ $ black
 $ s "breaks152"
 # breakgato
 # gain 1
+# orbit 16
 
+hush
 
 d1
 $ sometimes (off 0.125 (|+ up "[7|12]")) 
@@ -36,7 +38,7 @@ $ every 20 (striate 32)
 $ terrorist
 $ s "breaks152"
 # gain 1
-# track1
+
 
 d1
 $ sometimes (off 0.125 (|+ up "[7|12]")) 
@@ -45,7 +47,6 @@ $ fast 3
 $ loopAt 3
 $ terrorist 
 $ s "breaks152"
-# track1
 
 d1
 $ sometimes (off 0.125 (|+ up "[7|12]")) 
@@ -56,4 +57,3 @@ $ every 10 (chop 8)
 $ every 20 (striate 16)
 $ every 25 (striate 40)
 $ remarcRIP 
-# track1
