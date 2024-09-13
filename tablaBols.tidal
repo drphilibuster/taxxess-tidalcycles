@@ -1,0 +1,57 @@
+let bols soundFolder = inhabit [
+            ("dha", n "0" # s soundFolder)
+            , ("dhi", n "1" # s soundFolder)
+            , ("ta", n "2" # s soundFolder)
+            , ("ti", n "3" # s soundFolder)
+            , ("ri", n "4" # s soundFolder)
+            , ("ki", n "5" # s soundFolder)
+            , ("na", n "6" # s soundFolder)
+            , ("ge", n "7" # s soundFolder)
+            , ("dhin", n "8" # s soundFolder)
+            , ("ka", n "9" # s soundFolder)
+            , ("tiri", n "10" # s soundFolder)
+            , ("tirikit", n "10 22*2" # s soundFolder)
+            , ("gha", n "11" # s soundFolder)
+            , ("ghi", n "12" # s soundFolder)
+            , ("na", n "13" # s soundFolder)
+            , ("tha", n "14" # s soundFolder)
+            , ("tin", n "15" # s soundFolder)
+            , ("thi", n "16" # s soundFolder)
+            , ("ra", n "17" # s soundFolder)
+            , ("thin", n "18" # s soundFolder)
+            , ("thi2", n "19" # s soundFolder)
+            , ("ta2", n "20" # s soundFolder)
+            , ("ti2", n "21" # s soundFolder)
+            , ("te", n "22" # s soundFolder)
+            , ("dhe", n "23" # s soundFolder)
+            , ("ga", n "24" # s soundFolder)
+            , ("tak", n "25" # s soundFolder)
+            , ("ti3", n "26" # s soundFolder)
+            , ("khi", n "27" # s soundFolder)
+            , ("kath", n "31" # s soundFolder)
+                        ]
+
+d1 $  fast (choose [1,2]) 
+   $ (# speed (choose [1, 1.25,0.75]))
+   $ stack[ silence
+      ,   whenmod 32 30 (sometimesBy 0.3 (jux (palindrome) . (# speed "-1"))) $ 
+            bols "amencutup" "dhi <na tiri ge> dhin ge <tirikit ti ra ga ta>"
+   ]
+
+hush
+
+d2 
+$ slow [3.25 2.25]
+$ (# speed (choose [1, 1.25,0.75]))
+$ sometimes (off 0.125 (|+ up "[7|12]")) 
+$ sometimesBy 0.3 (jux (palindrome) . (# speed "-1"))
+$ struct "t*16" 
+$ note (
+    "[7]"
+    + 7
+    - "[5 7 10]/5")
+# s "<jungbass:2!4 jungbass:2!6>" 
+# breakgato
+# cut 1 
+# coarse 5
+# gain 0.7

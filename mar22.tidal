@@ -23,6 +23,7 @@ $ s "breaks152"
 hush
 
 d2 
+$ slow 2
 $ sometimes (off 0.125 (|+ up "[7|12]")) 
 $ someCyclesBy 0.2 (mask (binary 200)) 
 $ struct "t*16" 
@@ -34,3 +35,4 @@ $ note (
 # breakgato
 # cut 1 
 # coarse 5
+# gain 0.6
